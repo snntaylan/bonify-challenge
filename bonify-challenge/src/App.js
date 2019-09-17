@@ -52,6 +52,7 @@ class App extends Component {
       });
     });
 
+    // Winning Venue
     var max = this.state.recommendations.reduce(function (prev, current) {
       return (prev.optedBy > current.optedBy) ? prev : current
     });
@@ -64,9 +65,6 @@ class App extends Component {
       }
     });
 
-
-
-    // console.log(tmpRecom)
     console.log(this.state.recommendations);
     this.setState({
       participants: participantsArr
