@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 
 import './App.css';
-import { func } from 'prop-types';
 
 class App extends Component {
 
@@ -38,7 +37,6 @@ class App extends Component {
       option: this.state.optVenue,
       isVoteAdd: false
     })
-    // var tmpRecom = this.state.recommendations
     this.state.recommendations.map((venue, i) => {
       console.log(i)
       this.state.participants.map(participant => {
@@ -75,8 +73,8 @@ class App extends Component {
     this.state.recommendations = [];
     this.state.participants = [];
     const params = {
-      client_id: 'ZB0QTWR52ZSP3RYEJVIIACEF0U5HG4YW32XAXWF0UDPDGFHF',
-      client_secret: 'OJY43ZB45YYCWOUGFZ4RSLU0QCVYBPTVEGVIHO2S0KWCSRFO',
+      client_id: 'MXP2AOYXZUZZQNWKPJNFJ2JFQR1ZPJDIH5KCCWQ55M3X3HST',
+      client_secret: '4RNK0TPMNTVLULMPXE34E0UYJFOWHYWUTHB2U1VQROIX4BCM',
       near: `${this.state.searchInput}`,
       query: 'lunch',
       v: '20190724',
@@ -93,8 +91,8 @@ class App extends Component {
 
           result.response.venues.forEach(venue => {
             const params = {
-              client_id: 'ZB0QTWR52ZSP3RYEJVIIACEF0U5HG4YW32XAXWF0UDPDGFHF',
-              client_secret: 'OJY43ZB45YYCWOUGFZ4RSLU0QCVYBPTVEGVIHO2S0KWCSRFO',
+              client_id: 'MXP2AOYXZUZZQNWKPJNFJ2JFQR1ZPJDIH5KCCWQ55M3X3HST',
+              client_secret: '4RNK0TPMNTVLULMPXE34E0UYJFOWHYWUTHB2U1VQROIX4BCM',
               v: '20190724',
             }
             // Get venue specific details like URL, Category and Rating for each venue
@@ -143,26 +141,26 @@ class App extends Component {
     return (
       <div className="uk-container uk-fex uk-flex-center uk-padding App" >
         <div>
-          <h2>Lunch Place</h2>
+          <h2 id="header">Lunch Place</h2>
           <p>Choose a venue for lunch, highest votes is your lunch destination </p>
-          <div className="search-box uk-flex uk-flex-center">
-            <div className="uk-search uk-search-default uk-flex uk-width-1-3">
-              <input className="uk-search-input" type="search" name="searchInput" value={this.state.searchInput} placeholder="Where?" onChange={this.onChange} />
-              <button type="submit" onClick={this.onSearch} className="uk-button uk-button-primary">Search</button>
+          <div className="searchInput-1">
+            <div className="searchInput-2">
+              <input className="searchInput-3" type="search" name="searchInput" value={this.state.searchInput} placeholder=" 12305 Berlin" onChange={this.onChange} />
+              <button id="searchBtn" type="submit" onClick={this.onSearch} >Search</button>
             </div>
           </div>
           {this.state.recommendations.length ?
             <div className="searchResults uk-flex uk-flex-center">
               <div>
-                <table className="uk-table uk-width-5-6">
+                <table className="table table-bordered">
                   <thead>
                     <tr>
-                      <th>Participants</th>
+                      <th scope="col">Participants</th>
                       {this.state.recommendations.map((venue, i) =>
                         (
-                          <th key={i}>
+                          <th scope='col' key={i}>
                             {venue.url ?
-                              <h2><a href={venue.url} target="_blank">{venue.name}</a>	</h2>
+                              <h2 className="title"><a className="title" href={venue.url} target="_blank">{venue.name}</a>	</h2>
                               :
                               <h2>{venue.name}</h2>
                             }
@@ -185,17 +183,16 @@ class App extends Component {
                   <tbody>
                     {this.state.participants.length ? this.state.participants.map((participant, i) => (
                       <tr>
-                        <td>
-                          <p>{participant.name}</p>
+                        <td className="participant-add">
+                          <p className="taylan">{participant.name}</p>
                         </td>
                         {this.state.recommendations.map((venue, i) => (
-                          <td>{i == participant.option ? 'Yes' : 'No'}</td>
-                        ))}
+                          <td className={i == participant.option ? 'checkgreen' : ''}>{i == participant.option ? '✔' : '✔'}</td>))}
                       </tr>
                     )) : ''}
                     <tr>
                       <td>
-                        <input className="uk-width-1-1" type="text" name="name" value={this.state.name} placeholder="" onChange={this.onChange} />
+                        <input className="participant-wrt" type="text" name="name" value={this.state.name} placeholder="Type here" onChange={this.onChange} />
                       </td>
                       <td>
                         <div class="radio">
@@ -215,7 +212,7 @@ class App extends Component {
                     </tr>
                   </tbody>
                 </table>
-                <button type="button" className="uk-button uk-button-secondary" onClick={this.addParticipant}>Add Participant</button>
+                <button type="button" className="searchBtn" onClick={this.addParticipant}>Add Participant</button>
               </div>
             </div>
             :
@@ -231,33 +228,3 @@ export default App;
 
 
 
-
-// import React from "react";
-// import "./App.css";
-
-// import axios from "axios";
-// const API_URL = "https://api.foursquare.com/v2/venues/id";
-
-// function App() {
-//   axios
-//     .get(API_URL, {
-//       params: {
-//         client_id: "M4LLUAP5BOAXWP2BJ1Y2JY53VWETPXOVUKFVUBEFBHEMNAOY",
-//         client_secret: "O1DS2BSPLRNFTNT1SRGPRKNON1OJOZL4B1KD53PYHBXMZ0MV",
-//         near: "Berlin",
-//         query: "lunch",
-//         v: "20190724",
-//         limit: 3
-//       }
-//     })
-//     .then(res => {
-//       // console.log(res.data.response);
-//       console.log(res.data.response.venues.map(v => v.name));
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-//   return <div>selam</div>;
-// }
-
-// export default App;
