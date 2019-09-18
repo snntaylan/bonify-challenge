@@ -1,4 +1,4 @@
-# bonify-challenge
+<!-- # bonify-challenge -->
 
 ### Getting Started
 ```
