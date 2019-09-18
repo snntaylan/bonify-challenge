@@ -187,7 +187,7 @@ class App extends Component {
                           <p className="taylan">{participant.name}</p>
                         </td>
                         {this.state.recommendations.map((venue, i) => (
-                          <td className={i == participant.option ? 'checkgreen' : ''}>{i == participant.option ? '✔' : '✔'}</td>))}
+                          <td className={i == participant.option ? 'checkgreen' : ''}>{i == participant.option ? 'Yes' : 'No'}</td>))}
                       </tr>
                     )) : ''}
                     <tr>
@@ -212,7 +212,7 @@ class App extends Component {
                     </tr>
                   </tbody>
                 </table>
-                <button type="button" className="searchBtn" onClick={this.addParticipant}>Add Participant</button>
+                <button type="button" className="add-participant" onClick={this.addParticipant}>Add Participant</button>
               </div>
             </div>
             :
